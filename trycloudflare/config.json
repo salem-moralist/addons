@@ -2,10 +2,14 @@
   "name": "Try Cloudflare",
   "version": "1",
   "slug": "try_cloudflare",
-  "description": "Cloudflare argo tunnel provided for free.",
+  "description": "Argo tunnel provided for free by Cloudflare",
   "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
   "startup": "application",
   "boot": "auto",
-  "options": {},
-  "schema": {}
+  "options": {
+    "HA_URL": "http://10.0.1.1:8123",
+  },
+  "schema": {
+    "HA_URL": "url",
+  }
 }
