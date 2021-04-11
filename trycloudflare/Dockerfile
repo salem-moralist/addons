@@ -9,5 +9,5 @@ RUN go get github.com/cloudflare/cloudflared/cmd/cloudflared
 RUN mv /root/go/bin/cloudflared /usr/local/bin/cloudflared
 RUN chmod +x /usr/local/bin/cloudflared
 
-CMD ["/bin/bash", "-c", "cloudfalred tunnel --url $(bashio::config 'url')"]
+CMD ["/bin/bash", "-c", "cloudflared tunnel --url $(jq --raw-output '.url // empty' /data/options.json)"]
 
