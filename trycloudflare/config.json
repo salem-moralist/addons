@@ -1,0 +1,11 @@
+{
+  "name": "Try Cloudflare",
+  "version": "1",
+  "slug": "try_cloudflare",
+  "description": "Cloudflare argo tunnel provided for free.",
+  "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
+  "startup": "application",
+  "boot": "auto",
+  "options": {},
+  "schema": {}
+}
