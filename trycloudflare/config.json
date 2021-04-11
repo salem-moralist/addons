@@ -7,9 +7,9 @@
   "startup": "application",
   "boot": "auto",
   "options": {
-    "HA_URL": "http://10.0.1.1:8123",
+    "url": "http://10.0.1.1:8123"
   },
   "schema": {
-    "HA_URL": "url",
+    "url": "url"
   }
 }
