@@ -9,5 +9,8 @@ RUN apk add --no-cache libc6-compat curl
 
 RUN curl -sL -O https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64 && mv cloudflared-linux-arm64 /usr/local/bin/cloudflared &&  chmod +x /usr/local/bin/cloudflared
 
-CMD ["/bin/bash", "-c", " cloudflared tunnel login && cloudflared tunnel --name $(jq --raw-output '.tunnelName // empty' /data/options.json)  --url $(jq --raw-output '.localUrl // empty' /data/options.json) --hostname $(jq --raw-output '.hostname // empty' /data/options.json) "]
+# Copy data for add-on
+COPY run.sh /
+RUN chmod a+x /run.sh
 
+CMD [ "/run.sh" ]
