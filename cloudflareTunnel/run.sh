@@ -21,6 +21,13 @@ if ! bashio::fs.file_exists ${TUNNEL_ORIGIN_CERT} ; then
     bashio::log.info "Deleting pre-existing tunnels."
     cloudflared tunnel delete ${TUNNEL_NAME}
     bashio::log.info "Tunnel ${TUNNEL_NAME} deleted."
+
+    bashio::log.info "Backup Cloudflared cert file to persistent volume"
+    cp /root/.cloudflared/cert.pem ${TUNNEL_ORIGIN_CERT}
+else
+    bashio::log.info "Getting Cloudflared cert file from persistent volume"
+    mkdir -p /root/.cloudflared
+    cp ${TUNNEL_ORIGIN_CERT} /root/.cloudflared/cert.pem
 fi
 
 cloudflared tunnel --config ${CONFIG_FILE} --name ${TUNNEL_NAME}  --url ${LOCAL_URL} --hostname ${HOSTNAME} --overwrite-dns
