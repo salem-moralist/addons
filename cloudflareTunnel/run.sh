@@ -5,6 +5,9 @@ LOCAL_URL="$(bashio::config 'localUrl')"
 HOSTNAME="$(bashio::config 'hostname')"
 
 
+echo ls /root/.cloudflared/cert.pem
+ls /root/.cloudflared/cert.pem || echo 'ls failed'
+
 
 if [ ! -f "/root/.cloudflared/cert.pem" ]; then
     echo "Cert file does not exists. Logging in."
