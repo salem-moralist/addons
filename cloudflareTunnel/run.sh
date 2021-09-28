@@ -7,10 +7,10 @@ CONFIG_DIR="/data"
 TUNNEL_CRED_FILE=${CONFIG_DIR}/tunnel-cert.json
 TUNNEL_ORIGIN_CERT=${CONFIG_DIR}/cert.pem
 
-export TUNNEL_CRED_FILE=${TUNNEL_CRED_FILE}
+export TUNNEL_CRED_FILE=${CONFIG_DIR}/tunnel-cert.json
 export TUNNEL_FORCE_PROVISIONING_DNS=true
 
-bashio::log.info "Checking if we have saved files on the persisten volume"
+bashio::log.info "Checking if we have saved files on the persistent volume"
 
 if ! bashio::fs.file_exists ${TUNNEL_ORIGIN_CERT} ; then
     bashio::log.info "Cert file does not exists. Logging in."
