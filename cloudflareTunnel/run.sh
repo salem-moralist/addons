@@ -10,6 +10,7 @@ TUNNEL_ORIGIN_CERT=${CONFIG_DIR}/cert.pem
 
 
 export TUNNEL_CRED_FILE=${TUNNEL_CRED_FILE}
+export TUNNEL_FORCE_PROVISIONING_DNS=true
 
 if ! bashio::fs.file_exists ${TUNNEL_ORIGIN_CERT} ; then
     bashio::log.info "Cert file does not exists. Logging in."
@@ -30,4 +31,4 @@ fi
 
 
 
-cloudflared tunnel --config ${CONFIG_FILE} --name ${TUNNEL_NAME}  --url ${LOCAL_URL} --hostname ${HOSTNAME} --overwrite-dns
+cloudflared --config ${CONFIG_FILE} --name ${TUNNEL_NAME}  --url ${LOCAL_URL} --hostname ${HOSTNAME}
