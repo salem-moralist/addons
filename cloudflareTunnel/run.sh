@@ -3,8 +3,8 @@
 TUNNEL_NAME="$(bashio::config 'tunnelName')"
 LOCAL_URL="$(bashio::config 'localUrl')"
 HOSTNAME="$(bashio::config 'hostname')"
-CONFIG_DIR="data"
-CONFIG_FILE="${CONFIG_DIR}/config.yml"
+CONFIG_DIR="/data"
+CONFIG_FILE=${CONFIG_DIR}/config.yml
 TUNNEL_ORIGIN_CERT=${CONFIG_DIR}/cert.pem
 
 bashio::log.info ls /root/.cloudflared/cert.pem
