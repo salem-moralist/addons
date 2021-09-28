@@ -5,13 +5,15 @@ LOCAL_URL="$(bashio::config 'localUrl')"
 HOSTNAME="$(bashio::config 'hostname')"
 CONFIG_DIR="data"
 CONFIG_FILE="${CONFIG_DIR}/config.yml"
-TUNNEL_ORIGIN_CERT=${CONFIG_DIR}/cert/pem
+TUNNEL_ORIGIN_CERT=${CONFIG_DIR}/cert.pem
 
 bashio::log.info ls /root/.cloudflared/cert.pem
 ls /root/.cloudflared/cert.pem || bashio::log.info 'ls failed'
 
+bashio::log.info ls ${TUNNEL_ORIGIN_CERT}
+ls ${TUNNEL_ORIGIN_CERT} || bashio::log.info 'ls failed'
 
-if ! bashio::fs.file_exists "/root/.cloudflared/cert.pem" ; then
+if ! bashio::fs.file_exists ${TUNNEL_ORIGIN_CERT} ; then
     bashio::log.info "Cert file does not exists. Logging in."
     cloudflared tunnel login
     bashio::log.info "Logged in, cleanup pre-existing tunnels."
