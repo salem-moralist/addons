@@ -1,0 +1,19 @@
+{
+  "name": "Cloudflare Tunnel",
+  "version": "1",
+  "slug": "cloudflare_tunnel",
+  "description": "Argo tunnel provided for free by Cloudflare",
+  "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
+  "startup": "application",
+  "boot": "auto",
+  "options": {
+      "localUrl": "http://10.0.1.1:8123",
+      "tunnelName": "homeassistant",
+      "hostname":"homeassistant.example.com"
+  },
+  "schema": {
+      "localUrl": "url",
+      "tunnelName": "str",
+      "hostname": "str"
+  }
+}
