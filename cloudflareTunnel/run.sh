@@ -3,20 +3,21 @@
 TUNNEL_NAME="$(bashio::config 'tunnelName')"
 LOCAL_URL="$(bashio::config 'localUrl')"
 HOSTNAME="$(bashio::config 'hostname')"
+CONFIG_DIR="data/config.yml"
 
 
-echo ls /root/.cloudflared/cert.pem
-ls /root/.cloudflared/cert.pem || echo 'ls failed'
+bashio::log.info ls /root/.cloudflared/cert.pem
+ls /root/.cloudflared/cert.pem || bashio::log.info 'ls failed'
 
 
-if [ ! -f "/root/.cloudflared/cert.pem" ]; then
-    echo "Cert file does not exists. Logging in."
+if [ ! bashio::fs.file_exists "/root/.cloudflared/cert.pem" ]; then
+    bashio::log.info "Cert file does not exists. Logging in."
     cloudflared tunnel login
-    echo "Logged in, cleanup pre-existing tunnels."
+    bashio::log.info "Logged in, cleanup pre-existing tunnels."
     cloudflared tunnel cleanup ${TUNNEL_NAME}
-    echo "Deleting pre-existing tunnels."
+    bashio::log.info "Deleting pre-existing tunnels."
     cloudflared tunnel delete ${TUNNEL_NAME}
-    echo "Tunnel ${TUNNEL_NAME} deleted."
+    bashio::log.info "Tunnel ${TUNNEL_NAME} deleted."
 fi
 
-cloudflared tunnel --name ${TUNNEL_NAME}  --url ${LOCAL_URL} --hostname ${HOSTNAME}
+cloudflared tunnel --config ${CONFIG_DIR} --name ${TUNNEL_NAME}  --url ${LOCAL_URL} --hostname ${HOSTNAME} ----overwrite-dns
