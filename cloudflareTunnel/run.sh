@@ -4,13 +4,13 @@ TUNNEL_NAME="$(bashio::config 'tunnelName')"
 LOCAL_URL="$(bashio::config 'localUrl')"
 HOSTNAME="$(bashio::config 'hostname')"
 CONFIG_DIR="/data"
-CONFIG_FILE=${CONFIG_DIR}/config.yml
 TUNNEL_CRED_FILE=${CONFIG_DIR}/tunnel-cert.json
 TUNNEL_ORIGIN_CERT=${CONFIG_DIR}/cert.pem
 
-
 export TUNNEL_CRED_FILE=${TUNNEL_CRED_FILE}
 export TUNNEL_FORCE_PROVISIONING_DNS=true
+
+bashio::log.info "Checking if we have saved files on the persisten volume"
 
 if ! bashio::fs.file_exists ${TUNNEL_ORIGIN_CERT} ; then
     bashio::log.info "Cert file does not exists. Logging in."
@@ -29,6 +29,5 @@ else
     cp ${TUNNEL_ORIGIN_CERT} /root/.cloudflared/cert.pem
 fi
 
-
-
-cloudflared --config ${CONFIG_FILE} --name ${TUNNEL_NAME}  --url ${LOCAL_URL} --hostname ${HOSTNAME}
+bashio::log.info "Starting Cloudflared tunnel"
+cloudflared --name ${TUNNEL_NAME}  --url ${LOCAL_URL} --hostname ${HOSTNAME}
