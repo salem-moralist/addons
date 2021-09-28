@@ -20,4 +20,4 @@ if [ ! bashio::fs.file_exists "/root/.cloudflared/cert.pem" ]; then
     bashio::log.info "Tunnel ${TUNNEL_NAME} deleted."
 fi
 
-cloudflared tunnel --config ${CONFIG_DIR} --name ${TUNNEL_NAME}  --url ${LOCAL_URL} --hostname ${HOSTNAME} ----overwrite-dns
+cloudflared tunnel --config ${CONFIG_DIR} --name ${TUNNEL_NAME}  --url ${LOCAL_URL} --hostname ${HOSTNAME} --overwrite-dns
